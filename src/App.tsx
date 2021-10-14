@@ -1,6 +1,7 @@
 import React from 'react'
 import logo from './logo.svg'
 import './App.css'
+import { ceshi } from '@utils/test'
 
 function App(): JSX.Element {
   console.log(process.env.NODE_ENV)
@@ -20,6 +21,13 @@ function App(): JSX.Element {
         >
           Learn React
         </a>
+        <button
+          onClick={() => {
+            ceshi(111)
+          }}
+        >
+          test
+        </button>
       </header>
     </div>
   )

@@ -7,8 +7,15 @@ const {
 } = require('customize-cra')
 const path = require('path')
 
-const customize = () => (config) => {
-  // 要自定义的配置内容
-  return config
+function resolve(dir) {
+  console.log('~~~~~path', path.join(__dirname, dir))
+  return path.join(__dirname, dir)
 }
-module.exports = override()
+
+module.exports = override(
+  addWebpackAlias({
+    ['@']: resolve('src'),
+    ['@utils']: resolve('src/utils'),
+  }),
+  addDecoratorsLegacy()
+)

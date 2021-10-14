@@ -17,6 +17,7 @@ module.exports = {
     },
     ecmaVersion: 13,
     sourceType: 'module',
+    // project: './tsconfig.json',
   },
   plugins: ['react', '@typescript-eslint', 'prettier'],
   rules: {
@@ -27,5 +28,6 @@ module.exports = {
     semi: ['error', 'never'],
     '@typescript-eslint/no-var-requires': 0,
     'jsx-quotes': ['error', 'prefer-single'], //jsx 单引号
+    'no-debugger': 'error',
   },
 }
