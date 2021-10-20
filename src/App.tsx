@@ -1,4 +1,5 @@
 import React from 'react'
+import { LoginScreen } from './screens/login'
 import logo from './logo.svg'
 import './App.css'
 import { ceshi } from '@utils/test'
@@ -8,6 +9,7 @@ function App(): JSX.Element {
 
   return (
     <div className='App'>
+      <LoginScreen />
       <header className='App-header'>
         <img src={logo} className='App-logo' alt='logo' />
         <p>
