@@ -1,8 +1,8 @@
 import { useAuth } from '@/context/auth-context'
 import React, { FormEvent } from 'react'
 
-export const LoginScreen = () => {
-  const { login, user } = useAuth()
+export const RegisterScreen = () => {
+  const { register, user } = useAuth()
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -32,7 +32,7 @@ export const LoginScreen = () => {
         <input type='password' id={'password'} />
       </div>
 
-      <button type='submit'>login</button>
+      <button type='submit'>register</button>
     </form>
   )
 }
