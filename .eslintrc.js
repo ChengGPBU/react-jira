@@ -29,5 +29,6 @@ module.exports = {
     '@typescript-eslint/no-var-requires': 0,
     'jsx-quotes': ['error', 'prefer-single'], //jsx 单引号
     'no-debugger': 'error',
+    'react/no-children-prop': 'off', //error 禁止使用 children 做 props
   },
 }
