@@ -1,10 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import './index.css'
+import { loadDevTools } from 'jira-dev-tool'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
-import { loadDevTools } from 'jira-dev-tool'
 import { AppProviders } from '@/context'
+import './index.css'
 
 loadDevTools(() =>
   // eslint-disable-next-line react/no-render-return-value

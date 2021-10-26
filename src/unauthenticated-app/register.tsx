@@ -1,38 +1,28 @@
+import React from 'react'
 import { useAuth } from '@/context/auth-context'
-import React, { FormEvent } from 'react'
+import { Form, Input } from 'antd'
+import { LongButton } from '.'
 
 export const RegisterScreen = () => {
   const { register, user } = useAuth()
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-    const name = (event.currentTarget.elements[0] as HTMLInputElement).value
-    const password = (event.currentTarget.elements[1] as HTMLInputElement).value
-    loginAction(name, password)
+  const handleSubmit = (values: { username: string; password: string }) => {
+    register(values)
   }
 
-  const loginAction = (name: string, password: string) => {
-    fetch(' http://localhost:3001/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ name, password }),
-    }).then()
-  }
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor='username'>name</label>
-        <input type='text' id={'username'} />
-      </div>
+    <Form onFinish={handleSubmit}>
+      <Form.Item name={'username'} rules={[{ required: true, message: '请输入用户民' }]}>
+        <Input type='text' placeholder={'用户名'} id={'username'} />
+      </Form.Item>
 
-      <div>
-        <label htmlFor='password'>mima</label>
-        <input type='password' id={'password'} />
-      </div>
+      <Form.Item name={'password'} rules={[{ required: true, message: '请输入密码' }]}>
+        <Input type='password' placeholder={'密码'} id={'password'} />
+      </Form.Item>
 
-      <button type='submit'>register</button>
-    </form>
+      <LongButton htmlType='submit' type='primary'>
+        注册
+      </LongButton>
+    </Form>
   )
 }

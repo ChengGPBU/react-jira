@@ -30,5 +30,6 @@ module.exports = {
     'jsx-quotes': ['error', 'prefer-single'], //jsx 单引号
     'no-debugger': 'error',
     'react/no-children-prop': 'off', //error 禁止使用 children 做 props
+    '@typescript-eslint/ban-types': 'off', // 关闭禁止使用 object
   },
 }
