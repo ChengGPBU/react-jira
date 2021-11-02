@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Button, Card, Divider } from 'antd'
+import { Button, Card, Divider, Image } from 'antd'
 import { LoginScreen } from './login'
 import { RegisterScreen } from './register'
 import styled from '@emotion/styled'
@@ -18,9 +18,9 @@ export const UnauthenticatedApp = () => {
         <Title>{isRegister ? '请注册' : '请登陆'}</Title>
         {isRegister ? <RegisterScreen /> : <LoginScreen />}
         <Divider />
-        <a onClick={() => setIsRegister(!isRegister)}>
+        <Button type='link' onClick={() => setIsRegister(!isRegister)}>
           切换到{isRegister ? '已有账号，直接登陆' : '没有账号，注册'}
-        </a>
+        </Button>
       </ShadowCard>
     </Container>
   )
@@ -37,13 +37,13 @@ color: rgb(94,108,132);
 
 const Background = styled.div`
 position: absolute;
-width: 100%;
-height: 100%;
+width: 100vw;
+height: 100vh;
 background-repeat: no-repeat;
 background-attachment: fixed;
 background-position: left bottom, right bottom;
 background-size: calc((100vw - 40rem)/2 - 3.2rem), calc((100vw - 40rem)/2 - 3.2rem), cover;
-background-image: url(${left}) url(${right});
+background-image: url(${left}), url(${right});
 `
 
 const Header = styled.header`
