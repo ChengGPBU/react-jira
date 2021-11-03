@@ -1,4 +1,4 @@
-import { http } from '@/http/http'
+import { http } from '@/http'
 import { User } from '@/inter/user/user'
 import React, { ReactNode, useState } from 'react'
 import { useDidMount } from 'rooks'
@@ -38,8 +38,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const register = (form: AuthForm) => auth.register(form).then(setUser)
   const logout = () => auth.logout().then(() => setUser(null))
 
-  useDidMount(() => {
-    initUser()
+  useDidMount(async () => {
+    setUser(await initUser())
   })
   return <AuthContext.Provider children={children} value={{ user, login, register, logout }} />
 }

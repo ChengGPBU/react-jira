@@ -1,7 +1,7 @@
 import React from 'react'
 import { Form, Input, Select } from 'antd'
 export interface User {
-  id: number
+  id: string
   name: string
   organization: string
   ownerId: number
@@ -30,7 +30,10 @@ export const SearchPanel = ({ users, param, setParam }: SearchPanelProps) => {
         />
       </Form.Item>
       <Form.Item>
-        <Select>
+        <Select
+          value={param.personId}
+          onChange={(value) => setParam({ ...param, personId: value })}
+        >
           <Select.Option value=''>负责人</Select.Option>
           {users.map((user) => (
             <Select.Option value={user.id} key={user.id}>
