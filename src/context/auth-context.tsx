@@ -1,3 +1,5 @@
+import { FullPageErrorFallback, FullPageLoading } from '@/components/lib'
+import { useAsync } from '@/hooks/use-async'
 import { http } from '@/http'
 import { User } from '@/inter/user/user'
 import React, { ReactNode, useState } from 'react'
@@ -32,15 +34,23 @@ const AuthContext = React.createContext<ProviderValue | undefined>(undefined)
 AuthContext.displayName = 'AuthContext'
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [user, setUser] = useState<User | null>(null)
+  const { run, data: user, setData: setUser, isLoading, isIdel, error } = useAsync<User | null>()
 
   const login = (form: AuthForm) => auth.login(form).then(setUser)
   const register = (form: AuthForm) => auth.register(form).then(setUser)
   const logout = () => auth.logout().then(() => setUser(null))
 
   useDidMount(async () => {
-    setUser(await initUser())
+    await run(initUser())
   })
+
+  if (isIdel || isLoading) {
+    return <FullPageLoading />
+  }
+
+  if (error) {
+    return <FullPageErrorFallback error={error} />
+  }
   return <AuthContext.Provider children={children} value={{ user, login, register, logout }} />
 }
 
