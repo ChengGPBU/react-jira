@@ -6,7 +6,7 @@ import { User } from './search-panel'
 export interface Project {
   id: number
   name: string
-  personId: string
+  personId: number
   ownerId: number
   organization: string
   pin: boolean
