@@ -7,18 +7,18 @@ import reportWebVitals from './reportWebVitals'
 import { AppProviders } from '@/context'
 import './index.css'
 
-loadServer(() =>
-  // eslint-disable-next-line react/no-render-return-value
-  ReactDOM.render(
-    <React.StrictMode>
-      <AppProviders>
-        <DevTools />
-        <App />
-      </AppProviders>
-    </React.StrictMode>,
-    document.getElementById('root')
-  )
+// loadServer(() =>
+// eslint-disable-next-line react/no-render-return-value
+ReactDOM.render(
+  <React.StrictMode>
+    <AppProviders>
+      {/* <DevTools /> */}
+      <App />
+    </AppProviders>
+  </React.StrictMode>,
+  document.getElementById('root')
 )
+// )
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

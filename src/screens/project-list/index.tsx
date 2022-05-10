@@ -11,9 +11,9 @@ import { usePorjectSearchParams } from './util'
 
 export const ProjectListScreen = () => {
   // const [, setParam] = useState({ name: '', personId: '' })
-  const [param, setParam] = usePorjectSearchParams()
-  const debouncedParam = useDebounce(setParam, 500)
-  const { isLoading, error, data: list } = useProjects(param)
+  // const [param, setParam] = usePorjectSearchParams()
+  // const debouncedParam = useDebounce(setParam, 500)
+  // const { isLoading, error, data: list } = useProjects(param)
   const { data: users } = useUsers()
 
   // console.log(useUrlQueryParam(['name']))
@@ -21,9 +21,9 @@ export const ProjectListScreen = () => {
   return (
     <Container>
       <h1>项目列表</h1>
-      <SearchPanel users={users || []} param={param} setParam={debouncedParam} />
+      {/* <SearchPanel users={users || []} param={param} setParam={debouncedParam} />
       {error ? <Typography.Text type='danger'>{error.message}</Typography.Text> : null}
-      <List dataSource={list || []} loading={isLoading} users={users || []} />
+      <List dataSource={list || []} loading={isLoading} users={users || []} /> */}
     </Container>
   )
 }

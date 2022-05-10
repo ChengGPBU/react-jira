@@ -4,21 +4,22 @@ const apiUlr = process.env.REACT_APP_API_URL
 const localStorageKey = '__auth_provider_token__'
 export const getToken = () => window.localStorage.getItem(localStorageKey)
 
-export const handleUserResponse = ({ user }: { user: User }): User => {
+export const handleUserResponse = (user: User): User => {
   window.localStorage.setItem(localStorageKey, user.token || '')
   return user
 }
 
 export const login = (data: { username: string; password: string }) => {
-  return fetch(`${apiUlr}/login`, {
+  return fetch(`${apiUlr}/auth/login`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(data),
+    body: JSON.stringify({ name: data.username, password: data.password }),
   }).then(async (response) => {
     if (response.ok) {
-      return handleUserResponse(await response.json())
+      const data = await response.json()
+      return handleUserResponse(data)
     } else {
       return Promise.reject(await response.json())
     }
