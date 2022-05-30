@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from '@emotion/styled'
-import { Button, Dropdown, Menu } from 'antd'
+import { Button, Dropdown, Menu, Typography } from 'antd'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { Row } from './components/lib'
 import { useAuth } from './context/auth-context'
@@ -8,7 +8,11 @@ import { ProjectListScreen } from './screens/project-list'
 import { ReactComponent as SoftwareLogo } from './assets/software-logo.svg'
 import { ProjectScreen } from './screens/project'
 import { MainScreen } from './screens/main'
+import { Home } from './screens/home'
 import { resetRoute } from './utils'
+import { MiniHome } from './screens/mini'
+
+const { Title } = Typography
 
 export const AuthenticatedApp = () => {
   return (
@@ -17,8 +21,19 @@ export const AuthenticatedApp = () => {
       <BrowserRouter>
         <Routes>
           {/* <Route path={'/'} element={<ProjectListScreen />} /> */}
-          <Route path={'/'} element={<MainScreen />} />
-          {/* <Route path={'/projects'} element={<ProjectListScreen />} /> */}
+          <Route path={'/'} element={<MainScreen />}>
+            <Route index={true} element={<Home />} />
+            <Route path={'/home'} element={<Home />} />
+            <Route path={'/brand'} element={<div>brand</div>} />
+            <Route path='/application/mini' element={<MiniHome />} />
+            <Route path='/application/app' element={<div>app</div>} />
+            <Route path='/application/bundle' element={<div>bundle</div>} />
+            <Route path='/application/h5' element={<div>h5</div>} />
+            <Route path='/publish/list' element={<div>list</div>} />
+            <Route path='/publish/buildlist' element={<div>buildlist</div>} />
+            <Route path='/users' element={<div>users</div>} />
+          </Route>
+          <Route path={'/projects'} element={<ProjectListScreen />} />
           {/* <Route path={'/projects/:projectId/*'} element={<ProjectScreen />} /> */}
         </Routes>
       </BrowserRouter>
@@ -32,7 +47,8 @@ const PageHeader = () => {
     <Header between={true}>
       <HeaderLeft gap={true}>
         <Button type='link' onClick={resetRoute}>
-          <SoftwareLogo width={'18rem'} color={'rgb(38, 132,255)'} />
+          <Title level={3}>移动应用发布管理中台</Title>
+          {/* <SoftwareLogo width={'18rem'} color={'rgb(38, 132,255)'} /> */}
         </Button>
       </HeaderLeft>
 

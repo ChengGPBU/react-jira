@@ -12,7 +12,7 @@ export const LoginScreen = () => {
   }
 
   const loginAction = (name: string, password: string) => {
-    fetch(' http://localhost:3001/login', {
+    fetch(' http://localhost:3000/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

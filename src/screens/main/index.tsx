@@ -1,10 +1,11 @@
 import React from 'react'
 import type { MenuProps } from 'antd'
 import { Layout, Menu, Breadcrumb } from 'antd'
+import { Routes, Route, Navigate, Link, Outlet } from 'react-router-dom'
 import {
-  DesktopOutlined,
-  PieChartOutlined,
-  FileOutlined,
+  AccountBookOutlined,
+  BankOutlined,
+  HomeOutlined,
   TeamOutlined,
   UserOutlined,
 } from '@ant-design/icons'
@@ -17,7 +18,7 @@ function getItem(
   label: React.ReactNode,
   key: React.Key,
   icon?: React.ReactNode,
-  children?: MenuItem[]
+  children?: MenuItem[] | null
 ): MenuItem {
   return {
     key,
@@ -28,15 +29,19 @@ function getItem(
 }
 
 const items: MenuItem[] = [
-  getItem('Option 1', '1', <PieChartOutlined />),
-  getItem('Option 2', '2', <DesktopOutlined />),
-  getItem('User', 'sub1', <UserOutlined />, [
-    getItem('Tom', '3'),
-    getItem('Bill', '4'),
-    getItem('Alex', '5'),
+  getItem(<Link to='home'>首页</Link>, '1', <HomeOutlined></HomeOutlined>, null),
+  getItem(<Link to='brand'>品牌管理</Link>, '2', <BankOutlined />, null),
+  getItem('应用管理', 'sub1', <AccountBookOutlined />, [
+    getItem(<Link to='/application/mini'>小程序管理</Link>, '3', null, null),
+    getItem(<Link to='/application/app'>App管理</Link>, '4', null, null),
+    getItem(<Link to='/application/bundle'>Bundle管理</Link>, '5', null, null),
+    getItem(<Link to='/application/h5'>H5管理</Link>, '6', null, null),
   ]),
-  getItem('Team', 'sub2', <TeamOutlined />, [getItem('Team 1', '6'), getItem('Team 2', '8')]),
-  getItem('Files', '9', <FileOutlined />),
+  getItem('发布管理', 'sub2', <UserOutlined />, [
+    getItem(<Link to='/publish/list'>发布单</Link>, '7', null, null),
+    getItem(<Link to='/publish/buildlist'>构建发布</Link>, '8', null, null),
+  ]),
+  getItem(<Link to='/users'>用户管理</Link>, '9', <TeamOutlined />, null),
 ]
 
 export class MainScreen extends React.Component {
@@ -54,18 +59,20 @@ export class MainScreen extends React.Component {
     return (
       <Layout style={{ minHeight: '100vh' }}>
         <Sider collapsible collapsed={collapsed} onCollapse={this.onCollapse}>
-          <div className='logo' />
-          <Menu theme='dark' defaultSelectedKeys={['1']} mode='inline' items={items} />
+          {/* <div className='logo' /> */}
+          <Menu
+            theme='dark'
+            defaultSelectedKeys={['1']}
+            mode='inline'
+            items={items}
+            onClick={(e) => {
+              console.log('~~~~~~~~MenuItem', e)
+            }}
+          />
         </Sider>
         <Layout className='site-layout'>
-          <Content style={{ margin: '0 16px' }}>
-            <Breadcrumb style={{ margin: '16px 0' }}>
-              <Breadcrumb.Item>User</Breadcrumb.Item>
-              <Breadcrumb.Item>Bill</Breadcrumb.Item>
-            </Breadcrumb>
-            <div className='site-layout-background' style={{ padding: 24, minHeight: 360 }}>
-              Bill is a cat.
-            </div>
+          <Content>
+            <Outlet />
           </Content>
           <Footer style={{ textAlign: 'center' }}>Chengguang ©2022 Jenkins CI/CD</Footer>
         </Layout>

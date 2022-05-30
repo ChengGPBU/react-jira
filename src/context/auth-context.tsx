@@ -23,7 +23,8 @@ const initUser = async () => {
   let user = null
   const token = auth.getToken()
   if (token) {
-    const data = await http('me', { token })
+    const res = await http('me', { token })
+    const { data } = res
     user = { ...data, token }
   }
   return user

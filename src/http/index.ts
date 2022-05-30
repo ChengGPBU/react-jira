@@ -20,6 +20,7 @@ export const http = async (
       'Content-Type': data ? 'application/json' : '',
       ...headers,
     },
+
     ...customConfig,
   }
   if (config.method.toUpperCase() === 'GET') {
