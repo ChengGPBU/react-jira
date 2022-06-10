@@ -10,7 +10,9 @@ import { ProjectScreen } from './screens/project'
 import { MainScreen } from './screens/main'
 import { Home } from './screens/home'
 import { resetRoute } from './utils'
-import { MiniHome } from './screens/mini'
+import { BrandScreen } from './screens/brand'
+import AppScreen from './screens/application'
+import AppCreateScreen from './screens/application/create'
 
 const { Title } = Typography
 
@@ -24,11 +26,9 @@ export const AuthenticatedApp = () => {
           <Route path={'/'} element={<MainScreen />}>
             <Route index={true} element={<Home />} />
             <Route path={'/home'} element={<Home />} />
-            <Route path={'/brand'} element={<div>brand</div>} />
-            <Route path='/application/mini' element={<MiniHome />} />
-            <Route path='/application/app' element={<div>app</div>} />
-            <Route path='/application/bundle' element={<div>bundle</div>} />
-            <Route path='/application/h5' element={<div>h5</div>} />
+            <Route path={'/brand'} element={<BrandScreen />} />
+            <Route path='/application/:name' element={<AppScreen />} />
+            <Route path='/application/:name/create' element={<AppCreateScreen />} />
             <Route path='/publish/list' element={<div>list</div>} />
             <Route path='/publish/buildlist' element={<div>buildlist</div>} />
             <Route path='/users' element={<div>users</div>} />
