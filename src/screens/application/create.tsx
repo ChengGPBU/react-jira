@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { createForm } from '@formily/core'
 import { Field } from '@formily/react'
-import { Form, FormItem, Input, Select, Submit, Upload, FormButtonGroup } from '@formily/antd'
+import type { UploadProps } from 'antd'
+import { message, Upload } from 'antd'
+import { Form, FormItem, Input, Select, Submit, FormButtonGroup } from '@formily/antd'
 import { action } from '@formily/reactive'
 import { Card, Button, Spin } from 'antd'
 import { UploadOutlined } from '@ant-design/icons'
@@ -12,6 +14,7 @@ import { useAuth } from '@/context/auth-context'
 import { FieldDataSource } from '@formily/core/esm'
 
 import './create.less'
+import { UploadFile } from 'antd/lib/upload/interface'
 
 export type Brand = {
   id: number
@@ -34,16 +37,45 @@ const form = createForm({
   validateFirst: true,
 })
 
-const IDUpload = (props: any) => {
+const uploadPorps: UploadProps = {
+  name: 'file',
+  action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
+  listType: 'picture',
+  headers: {
+    authorization: 'authorization-text',
+  },
+  onChange(info) {
+    // if (info.file.status !== 'uploading') {
+    //   console.log(info.file, info.fileList)
+    // }
+    console.log(info)
+    // if (info.file.status === 'done') {
+    //   message.success(`${info} file uploaded successfully`)
+    // } else if (info.file.status === 'error') {
+    //   message.error(`${info} file upload failed.`)
+    // }
+  },
+}
+
+const IDUpload = () => {
+  // const [fileList, setFileList] = useState<Array<UploadFile<any>>>([])
+  const { user } = useAuth()
+  const token = user?.token
   return (
     <Upload
-      {...props}
-      action='https://www.mocky.io/v2/5cc8019d300000980a055e76'
-      headers={{
-        authorization: 'authorization-text',
-      }}
+      {...uploadPorps}
+      // action='http://localhost:3000/file-upload/image'
+      // name='image'
+      // method='POST'
+      // // fileList={fileList}
+      // onChange={(fileList) => {
+      //   console.log('~~~~~~~~~~~status', fileList)
+      // }}
+      // headers={{
+      //   Authorization: token ? `Bearer ${token}` : '',
+      // }}
     >
-      <Button icon={<UploadOutlined />}>上传应用logo</Button>
+      <Button icon={<UploadOutlined />}>上传应用111logo</Button>
     </Upload>
   )
 }
@@ -69,23 +101,20 @@ export default () => {
     })
   )
 
-  const brandList = useCallback(
-    (field) => {
-      const { code } = brandListRes || {}
-      setLoading(isLoading)
-      if (isSuccess && code === 200) {
-        const list = brandListRes?.data.map((item: Brand) => {
-          const { brandName, id } = item
-          return {
-            label: brandName,
-            value: id,
-          }
-        })
-        setBrandList(list)
-      }
-    },
-    [isSuccess, brandListRes]
-  )
+  const brandList = useCallback(() => {
+    const { code } = brandListRes || {}
+    setLoading(isLoading)
+    if (isSuccess && code === 200) {
+      const list = brandListRes?.data.map((item: Brand) => {
+        const { brandName, id } = item
+        return {
+          label: brandName,
+          value: id,
+        }
+      })
+      setBrandList(list)
+    }
+  }, [isSuccess, brandListRes])
 
   useEffect(() => {
     setTimeout(() => {
@@ -95,15 +124,7 @@ export default () => {
         brandId: '',
         appPlatform: '',
         appType: appPlatform,
-        logo: [
-          {
-            name: 'this is image',
-            thumbUrl:
-              'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-            uid: 'rc-upload-1615825692847-2',
-            url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-          },
-        ],
+        logo: [],
         describe: '',
       })
       setLoading(false)

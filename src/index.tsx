@@ -1,6 +1,6 @@
 // import './wdyr'
 import React from 'react'
-import ReactDOM from 'react-dom'
+import { createRoot } from 'react-dom/client'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
 import { AppProviders } from '@/context'
@@ -14,12 +14,13 @@ import './index.css'
 //   </React.StrictMode>,
 //   document.getElementById('root')
 // )
+const container = document.getElementById('root') as HTMLElement
+const root = createRoot(container)
 
-ReactDOM.render(
+root.render(
   <AppProviders>
     <App />
-  </AppProviders>,
-  document.getElementById('root')
+  </AppProviders>
 )
 
 // If you want to start measuring performance in your app, pass a function
