@@ -6,10 +6,10 @@
     "configurations": [
         
         {
-            "type": "chrome",
+            "type": "pwa-chrome",
             "request": "launch",
-            "name": "Launch Chrome against localhost",
-            "url": "http://localhost:3000",
+            "name": "ReactJira",
+            "url": "http://localhost:3030",
             "webRoot": "${workspaceFolder}"
         }
     ]

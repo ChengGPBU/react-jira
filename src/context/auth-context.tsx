@@ -20,14 +20,19 @@ interface ProviderValue {
 }
 
 const initUser = async () => {
-  let user = null
+  const user = null
   const token = auth.getToken()
-  if (token) {
-    const res = await http('me', { token })
-    const { data } = res
-    user = { ...data, token }
-  }
-  return user
+  // if (token) {
+  //   const res = await http('me', { token })
+  //   const { data } = res
+  //   user = { ...data, token }
+  // }
+  // return user
+  return new Promise<User>((resolve, reject) => {
+    setTimeout(() => {
+      resolve({ name: 'frank', token: '111', id: '1111' })
+    }, 1000)
+  })
 }
 
 const AuthContext = React.createContext<ProviderValue | undefined>(undefined)

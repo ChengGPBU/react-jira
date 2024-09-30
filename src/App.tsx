@@ -12,7 +12,8 @@ function App(): JSX.Element {
   return (
     <div className='App'>
       <ErrorBoundary fallbackRender={FullPageErrorFallback}>
-        {user ? <AuthenticatedApp /> : <UnauthenticatedApp />}
+        {/* {user ? <AuthenticatedApp /> : <UnauthenticatedApp />} */}
+        <AuthenticatedApp />
       </ErrorBoundary>
     </div>
   )
