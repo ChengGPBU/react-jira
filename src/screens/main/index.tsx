@@ -65,6 +65,9 @@ const items: MenuItem[] = [
     getItem(<Link to='/publish/buildlist'>构建发布</Link>, '8', null, null),
   ]),
   getItem(<Link to='/users'>用户管理</Link>, '9', icons[4], null),
+  getItem('Demo', 'sub3', icons[4], [
+    getItem(<Link to='/demo/calendar'>日历</Link>, '10', null, null),
+  ]),
 ]
 
 export class MainScreen extends React.Component {

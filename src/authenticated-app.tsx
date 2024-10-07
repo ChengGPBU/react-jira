@@ -13,6 +13,7 @@ import { resetRoute } from './utils'
 import { BrandScreen } from './screens/brand'
 import AppScreen from './screens/application'
 import AppCreateScreen from './screens/application/create'
+import Calendar from './screens/demo/calendar'
 
 const { Title } = Typography
 
@@ -32,6 +33,7 @@ export const AuthenticatedApp = () => {
             <Route path='/publish/list' element={<div>list</div>} />
             <Route path='/publish/buildlist' element={<div>buildlist</div>} />
             <Route path='/users' element={<div>users</div>} />
+            <Route path='/demo/calendar' element={<Calendar />} />
           </Route>
           <Route path={'/projects'} element={<ProjectListScreen />} />
           {/* <Route path={'/projects/:projectId/*'} element={<ProjectScreen />} /> */}
